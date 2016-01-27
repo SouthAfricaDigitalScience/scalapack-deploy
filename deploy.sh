@@ -19,7 +19,7 @@ cmake ../ \
 
 nice -n20 make -j2
 make install
-
+mkdir -p modules
 echo "deploy has finished, making modulefile"
 (
 cat <<MODULE_FILE
@@ -35,6 +35,6 @@ setenv SL_DIR $::env(CVMFS_DIR)/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/$VERS
 prepend-path LD_LIBRARY_PATH $::env(SL_DIR)/lib
 prepend-path PATH $::env(SL_DIR)/bin
 MODULE_FILE
-) > modules/${VERSION}
-mkdir -p ${LIBRARIES_MODULES}/${NAME}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
+) > modules/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
+mkdir -p ${LIBRARIES_MODULES}/${NAME}
 cp modules/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} ${LIBRARIES_MODULES}/${NAME}
