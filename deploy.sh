@@ -5,7 +5,7 @@ module add deploy
 module add cmake
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
-module add  lapack/3.6.0-gcc-${GCC_VERSION}
+module add lapack/3.6.0-gcc-${GCC_VERSION}
 
 cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 rm -rf *
@@ -14,7 +14,7 @@ cmake ../ \
 -G"Unix Makefiles" \
 -DCMAKE_INSTALL_PREFIX=${SOFT_DIR}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} \
 -DBUILD_SHARED_LIBS=ON \
--DLAPACK_LIBRARIES="-L${LAPACK_DIR}/lib -llapack" \
+-DLAPACK_LIBRARIES="-L${LAPACK_DIR}/lib -L${LAPACK_DIR}/lib64 -llapack" \
 -DBLAS_LIBRARIES="-lblas"
 
 nice -n20 make -j2
