@@ -54,4 +54,3 @@ cmake ../ \
 -DBLAS_LIBRARIES="-lblas"
 
 nice -n20 make -j2
-make test
