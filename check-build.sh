@@ -24,7 +24,7 @@ proc ModulesHelp { } {
 }
 module-whatis "Sets the environment for using $NAME ($VERSION.) See https://github.com/SouthAfricaDigitalScience/scalapack-deploy"
 setenv SL_VERSION $VERSION
-setenv SL_DIR /apprepo/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/$VERSION-mpi-$OPENMPI_VERSION-gcc-$GCC_VERSION
+setenv SL_DIR /data/ci-build/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/$VERSION-mpi-$OPENMPI_VERSION-gcc-$GCC_VERSION
 prepend-path LD_LIBRARY_PATH $::env(SL_DIR)/lib
 prepend-path PATH $::env(SL_DIR)/bin
 MODULE_FILE
@@ -32,4 +32,5 @@ MODULE_FILE
 mkdir -p ${LIBRARIES_MODULES}/${NAME}
 cp modules/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} ${LIBRARIES_MODULES}/${NAME}
 
-module avail
+module avail ${NAME}
+module add ${NAME}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}

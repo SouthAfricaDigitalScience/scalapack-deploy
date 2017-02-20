@@ -53,4 +53,4 @@ cmake ../ \
 -DLAPACK_LIBRARIES="-L${LAPACK_DIR}/lib -llapack" \
 -DBLAS_LIBRARIES="-lblas"
 
-nice -n20 make -j2
+nice -n20 make

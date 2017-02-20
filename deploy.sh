@@ -10,6 +10,7 @@ module add lapack/3.6.0-gcc-${GCC_VERSION}
 cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 rm -rf *
 # we need to clean out the previous CI build
+cp -vf ${WORKSPACE}/SLmake.inc ${WORKSPACE}/${NAME}-${VERSION}
 cmake ../ \
 -G"Unix Makefiles" \
 -DCMAKE_INSTALL_PREFIX=${SOFT_DIR}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} \
