@@ -2,8 +2,8 @@
 # This is the build script for scalapack
 . /etc/profile.d/modules.sh
 module add ci
-module add cmake
 module add gcc/${GCC_VERSION}
+module add cmake
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
 module add lapack/3.6.0-gcc-${GCC_VERSION}
 SOURCE_FILE=${NAME}-${VERSION}.tgz
@@ -50,7 +50,6 @@ cmake ../ \
 -G"Unix Makefiles" \
 -DCMAKE_INSTALL_PREFIX=${SOFT_DIR}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} \
 -DBUILD_SHARED_LIBS=ON \
--DLAPACK_LIBRARIES="-L${LAPACK_DIR}/lib -llapack" \
--DBLAS_LIBRARIES="-lblas"
+-DLAPACK_LIBRARIES="-L${LAPACK_DIR}/lib -L${LAPACK_DIR}/lib64 -llapack" \ -DBLAS_LIBRARIES="-L${LAPACK_DIR}/lib64 -L${LAPACK_DIR}/lib -lblas"
 
 nice -n20 make
