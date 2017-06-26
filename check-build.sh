@@ -5,7 +5,7 @@ module add ci
 module add cmake
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
-module add  lapack/3.6.0-gcc-${GCC_VERSION}
+module add lapack/3.6.0-gcc-${GCC_VERSION}
 
 cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 # removing the tests since they timeout
@@ -22,6 +22,12 @@ cat <<MODULE_FILE
 proc ModulesHelp { } {
   puts stderr "\\tAdds $NAME ($VERSION.) to your environment."
 }
+
+module add cmake
+module add gcc/${GCC_VERSION}
+module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
+module add lapack/3.6.0-gcc-${GCC_VERSION}
+
 module-whatis "Sets the environment for using $NAME ($VERSION.) See https://github.com/SouthAfricaDigitalScience/scalapack-deploy"
 setenv SL_VERSION $VERSION
 setenv SL_DIR /data/ci-build/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/$VERSION-mpi-$OPENMPI_VERSION-gcc-$GCC_VERSION
@@ -29,8 +35,8 @@ prepend-path LD_LIBRARY_PATH $::env(SL_DIR)/lib
 prepend-path PATH $::env(SL_DIR)/bin
 MODULE_FILE
 ) > modules/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
-mkdir -p ${LIBRARIES_MODULES}/${NAME}
-cp modules/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} ${LIBRARIES_MODULES}/${NAME}
+mkdir -p ${LIBRARIES}/${NAME}
+cp modules/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} ${LIBRARIES}/${NAME}
 
 module avail ${NAME}
 module add ${NAME}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}

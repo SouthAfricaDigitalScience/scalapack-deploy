@@ -36,7 +36,7 @@ else
 fi
 
 # now unpack it into the workspace
-tar -xvzf ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE} --skip-old-files
+tar -xzf ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE} --skip-old-files
 
 #  generally tarballs will unpack into the NAME-VERSION directory structure. If this is not the case for your application
 #  ie, if it unpacks into a different default directory, either use the relevant tar commands, or change
@@ -50,6 +50,7 @@ cmake ../ \
 -G"Unix Makefiles" \
 -DCMAKE_INSTALL_PREFIX=${SOFT_DIR}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} \
 -DBUILD_SHARED_LIBS=ON \
--DLAPACK_LIBRARIES="-L${LAPACK_DIR}/lib -L${LAPACK_DIR}/lib64 -llapack" \ -DBLAS_LIBRARIES="-L${LAPACK_DIR}/lib64 -L${LAPACK_DIR}/lib -lblas"
+-DLAPACK_LIBRARIES="-L${LAPACK_DIR}/lib -L${LAPACK_DIR}/lib64 -llapack" \
+-DBLAS_LIBRARIES="-L${LAPACK_DIR}/lib64 -L${LAPACK_DIR}/lib -lblas"
 
 nice -n20 make

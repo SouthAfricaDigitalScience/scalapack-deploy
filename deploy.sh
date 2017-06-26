@@ -15,9 +15,10 @@ cmake ../ \
 -G"Unix Makefiles" \
 -DCMAKE_INSTALL_PREFIX=${SOFT_DIR}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} \
 -DBUILD_SHARED_LIBS=ON \
--DLAPACK_LIBRARIES="-L${LAPACK_DIR}/lib -L${LAPACK_DIR}/lib64 -llapack" \ -DBLAS_LIBRARIES="-L${LAPACK_DIR}/lib64 -L${LAPACK_DIR}/lib -lblas"
+-DLAPACK_LIBRARIES="-L${LAPACK_DIR}/lib -L${LAPACK_DIR}/lib64 -llapack" \
+-DBLAS_LIBRARIES="-L${LAPACK_DIR}/lib64 -L${LAPACK_DIR}/lib -lblas"
 
-nice -n20 make -j2
+nice -n20 make
 make install
 mkdir -p modules
 echo "deploy has finished, making modulefile"
@@ -36,5 +37,10 @@ prepend-path LD_LIBRARY_PATH $::env(SL_DIR)/lib
 prepend-path PATH $::env(SL_DIR)/bin
 MODULE_FILE
 ) > modules/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
-mkdir -p ${LIBRARIES_MODULES}/${NAME}
-cp modules/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} ${LIBRARIES_MODULES}/${NAME}
+mkdir -p ${LIBRARIES}/${NAME}
+cp modules/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION} ${LIBRARIES}/${NAME}
+
+
+module  avail ${NAME}
+
+module add ${NAME}/${VERSION}-mpi-${OPENMPI_VERSION}-gcc-${GCC_VERSION}
