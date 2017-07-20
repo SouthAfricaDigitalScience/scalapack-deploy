@@ -5,7 +5,7 @@ module add ci
 module add cmake
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
-module add lapack/3.6.0-gcc-${GCC_VERSION}
+module add lapack/${LAPACK_VERSION}-gcc-${GCC_VERSION}
 
 cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 # removing the tests since they timeout
@@ -26,7 +26,7 @@ proc ModulesHelp { } {
 module add cmake
 module add gcc/${GCC_VERSION}
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
-module add lapack/3.6.0-gcc-${GCC_VERSION}
+module add lapack/${LAPACK_VERSION}-gcc-${GCC_VERSION}
 
 module-whatis "Sets the environment for using $NAME ($VERSION.) See https://github.com/SouthAfricaDigitalScience/scalapack-deploy"
 setenv SL_VERSION $VERSION

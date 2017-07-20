@@ -5,7 +5,7 @@ module add ci
 module add gcc/${GCC_VERSION}
 module add cmake
 module add openmpi/${OPENMPI_VERSION}-gcc-${GCC_VERSION}
-module add lapack/3.6.0-gcc-${GCC_VERSION}
+module add lapack/${LAPACK_VERSION}-gcc-${GCC_VERSION}
 SOURCE_FILE=${NAME}-${VERSION}.tgz
 
 # We provide the base module which all jobs need to get their environment on the build slaves
@@ -38,10 +38,6 @@ fi
 # now unpack it into the workspace
 tar -xzf ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE} --skip-old-files
 
-#  generally tarballs will unpack into the NAME-VERSION directory structure. If this is not the case for your application
-#  ie, if it unpacks into a different default directory, either use the relevant tar commands, or change
-#  the next lines
-
 # We will be running configure and make in this directory
 mkdir -p ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 cp -vf ${WORKSPACE}/SLmake.inc ${WORKSPACE}/${NAME}-${VERSION}
@@ -53,4 +49,4 @@ cmake ../ \
 -DLAPACK_LIBRARIES="-L${LAPACK_DIR}/lib -L${LAPACK_DIR}/lib64 -llapack" \
 -DBLAS_LIBRARIES="-L${LAPACK_DIR}/lib64 -L${LAPACK_DIR}/lib -lblas"
 
-nice -n20 make
+make
